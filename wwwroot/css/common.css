@@ -1,0 +1,31 @@
+﻿body, h1, p {
+    margin: 0;
+    padding: 0;
+    }
+
+.column {
+    float: left;
+    width: 25%;
+    padding: 5px;
+    text-align:center;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.flex-container {
+    display: flex;
+    /*this centers the text horizontally*/
+    justify-content: center;
+    /*this centers the text vertically*/
+    align-items: center;
+    height: 400px;
+    font-size: 2.2rem;
+    background-image: url('../welcome_page.jpg');
+    background-size: cover;
+}

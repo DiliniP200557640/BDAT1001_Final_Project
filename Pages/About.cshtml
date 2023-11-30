@@ -1,0 +1,38 @@
+﻿@page
+@model AboutModel
+@{
+    ViewData["Title"] = "Team Members";
+}
+<h1>@ViewData["Title"]</h1>
+<head>
+    <link rel="stylesheet" href="~/css/common.css" asp-append-version="true" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="row">
+      <div class="column">
+        <img src="~/member.jpg" alt="Member1" style="width:75%">
+            <p><b>Barsha Tamang</b></p>
+      </div>
+      <div class="column">
+            <img src="~/member2.jpg" alt="Member2" style="width:75%">
+            <p><b>Dakheela Madanayake</b></p>
+      </div>
+      <div class="column">
+            <img src="~/member3.jpg" alt="Member3" style="width:75%">
+        <p><b>Dilini Pathirana</b></p>
+      </div>
+      <div class="column">
+            <img src="~/member4.jpg" alt="Member4" style="width:75%">
+         <p><b>Farah Sadoon</b></p>
+      </div>
+</div>
+</body>
+
+

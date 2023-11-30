@@ -1,0 +1,29 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: rgb(232,248,199);
+}
+
+.index-page {
+    background-image: url('../welcome_page.png');
+    background-size: cover;
+    height: 425px;
+    margin-left: -100px;
+    margin-right: -81px;
+    margin-top:-25px;
+    
+}
