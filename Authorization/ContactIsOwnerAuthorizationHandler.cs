@@ -1,4 +1,6 @@
-﻿using ContactManager.Models;
+﻿//verifies that the user acting on a resource owns the resource
+
+using ContactManager.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +27,7 @@ namespace ContactManager.Authorization
         {
             if (context.User == null || resource == null)
             {
-                return Task.CompletedTask;
+                return Task.CompletedTask; //requirements aren't met
             }
 
             // If it is not a CRUD operation, then return
@@ -35,16 +37,20 @@ namespace ContactManager.Authorization
                 requirement.Name != Constants.UpdateOperationName &&
                 requirement.Name != Constants.DeleteOperationName)
             {
-                return Task.CompletedTask; // tells that no further processing needed, authorization handler completed its operation
+                return Task.CompletedTask; // tells that no further processing needed,
+                                           // authorization handler completed its operation
             }
 
             //if it is a CRUD operation and also the user is the owner of the contact, then authorize the operation
             if (resource.OwnerID == _userManager.GetUserId(context.User))
             {
-                context.Succeed(requirement); //indicates successful authorization for specified requirement
+                context.Succeed(requirement); //indicates successful authorization
+                                              //for specified requirement
             }
 
-            return Task.CompletedTask;
+            return Task.CompletedTask; //if this returns without a prior call to 
+                                       // context.succeed, then reuirements aren't met, but not exact success /falure
+                                       // allows to run other authorization handlers
         }
     }
 }

@@ -12,17 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
-    
 
+// Configures default Identity system for user authentication,
+// role-based authorization and Entity Framework Core storage (DB support)
 builder.Services.AddDefaultIdentity<IdentityUser>(
     options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-// Add services to the container.
+// Configures the app to support razor pages.
 builder.Services.AddRazorPages();
 
+// This will require all users to be authenticated except for the razor pages with [AllowAnonymous] / any other policy defined
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = new AuthorizationPolicyBuilder()
@@ -30,9 +32,9 @@ builder.Services.AddAuthorization(options =>
         .Build();
 });
 
-// Authorization handlers.
+// Authorization handlers for specific authorization requirements.
 builder.Services.AddScoped<IAuthorizationHandler,
-                      ContactIsOwnerAuthorizationHandler>();
+                      ContactIsOwnerAuthorizationHandler>(); 
 
 builder.Services.AddSingleton<IAuthorizationHandler,
                       ContactAdministratorsAuthorizationHandler>();

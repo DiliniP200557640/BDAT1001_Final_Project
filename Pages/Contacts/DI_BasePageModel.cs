@@ -7,6 +7,7 @@ namespace ContactManager.Pages.Contacts
 {
     public class DI_BasePageModel : PageModel
     {
+        //accessible within base class or any derived page classes
         protected ApplicationDbContext Context { get; }
         protected IAuthorizationService AuthorizationService { get; }
         protected UserManager<IdentityUser> UserManager { get; }

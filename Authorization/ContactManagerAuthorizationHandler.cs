@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿//verifies the user acting on the resource is a manager
+
+using System.Threading.Tasks;
 using ContactManager.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
@@ -17,7 +19,7 @@ namespace ContactManager.Authorization
         {
             if (context.User == null || resource == null)
             {
-                return Task.CompletedTask;
+                return Task.CompletedTask; //requirements aren't met
             }
 
             // If not asking for approval/reject, return. Becasuse manager can only approve/reject/edit the contact details
@@ -30,10 +32,12 @@ namespace ContactManager.Authorization
             // Managers can approve or reject.
             if (context.User.IsInRole(Constants.ContactManagersRole))
             {
-                context.Succeed(requirement);
+                context.Succeed(requirement); //requirements met
             }
 
-            return Task.CompletedTask;
+            return Task.CompletedTask; //if this returns without a prior call to 
+                                       // context.succeed, then reuirements aren't met, but not exact success /falure
+                                       // allows to run other authorization handlers
         }
     }
 }

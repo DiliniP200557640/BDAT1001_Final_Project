@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿//verifies the user acting on the resource is an administrator
+
+using System.Threading.Tasks;
 using ContactManager.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
@@ -22,10 +24,12 @@ namespace ContactManager.Authorization
             // Administrators can do anything.
             if (context.User.IsInRole(Constants.ContactAdministratorsRole))
             {
-                context.Succeed(requirement);
+                context.Succeed(requirement); //requirements are met
             }
 
-            return Task.CompletedTask;
+            return Task.CompletedTask; //if this returns without a prior call to 
+                                       // context.succeed, then reuirements aren't met, but not exact success /falure
+                                       // allows to run other authorization handlers
         }
     }
 }
